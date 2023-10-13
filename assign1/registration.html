@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style/style.css">
+	<script src="registration.js"></script>
+	<script type="text/javascript" src="jquery-3.6.0.js"></script>
+    <title>Registration</title>
+  </head>
+  <body>
+   <div class="top">
+    <!-- Same nav bar with other pages, but no link to login or logout, because users 
+      come to this page when they don't have acccount -->
+    <div class="jumbotron text-center" style="margin-bottom:0;"> <!--  background-image: url('img/background.jfif');-->
+	  <h1>UniBNB</h1>
+	  <p><i>Make your life easier and comfortable</i></p>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="homepage.html">UniBnB</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="host_dashboard.html">Host</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="manager_dashboard.html">Manager</a>
+          </li>
+        </ul>
+		
+       </div>  
+    </nav>
+   </div>
+   
+   <div class="w3-bar w3-border-bottom">
+    <!-- Tab to show different registration requirements for clients and hosts -->
+    <button class="tablink w3-bar-item w3-button" onclick="openRegis(event, 'Client')">Client</button>
+    <button class="tablink w3-bar-item w3-button" onclick="openRegis(event, 'Host')">Host</button>
+   </div>
+   
+   <!-- Client registration part -->
+   <div id="Client" class="w3-container tabcontent">
+     <h2 style="text-align:center;">Client Registration</h2>
+   
+     <form class="regiForm" name="registration" id="client_registration" onsubmit="return validateForm()" action="homepage.html">
+       <span id = "msg"></span>
+	   <p>
+	     <label for="name">Name: </label>
+	     <input type="text" id="name" name="name">
+	   </p>
+	   <p>
+	     <label for="email">Email: </label>
+	     <input type="text" id="email" name="email">
+	   </p>
+	   <p>
+	     <label for="mobil">Mobile Phone: </label>
+	     <input type="text" id="mobil" name="mobil">
+	   </p>
+	   <p>
+	     <label for="password">Password: </label>
+	     <input type="text" id="password" name="password">
+	   </p>
+	   <p>
+	     <label for="re_password">Confirm Password: </label>
+	     <input type="text" id="re_password" name="re_password">
+	   </p>
+	   <p>
+	     <label for="address">Postal Address: </label>
+	     <input type="text" id="address" name="address">
+	   </p>
+	   <button type="submit" id="submit">Submit</button>
+	   <button type="reset" id="reset">Reset</button>
+   </form>
+   </div>
+   
+   <!-- Host registration part -->
+   <div id="Host" class="w3-container tabcontent">
+     <h2 style="text-align:center;">Host Registration</h2>
+   
+     <form class="regihostForm" style="text-align:center;" name="host_registration" id="host_registration" onsubmit="return validateForm1()" action="homepage.html">
+       <span id = "host_msg"></span>
+	   <p>
+	     <label for="host_name">Name: </label>
+	     <input type="text" id="host_name" name="host_name">
+	   </p>
+	   <p>
+	     <label for="host_email">Email: </label>
+	     <input type="text" id="host_email" name="host_email">
+	   </p>
+	   <p>
+	     <label for="host_mobil">Mobile Phone: </label>
+	     <input type="text" id="host_mobil" name="host_mobil">
+	   </p>
+	   <p>
+	     <label for="host_password">Password: </label>
+	     <input type="text" id="host_password" name="host_password">
+	   </p>
+	   <p>
+	     <label for="host_re_password">Confirm Password: </label>
+	     <input type="text" id="host_re_password" name="host_re_password">
+	   </p>
+	   <p>
+	     <label for="host_address">Postal Address: </label>
+	     <input type="text" id="host_address" name="host_address">
+	   </p>
+	   <p>
+	     <label for="host_abn">ABN number: </label>
+	     <input type="text" id="host_abn" name="host_abn">
+	   </p>
+	   <button type="submit" id="host_submit">Submit</button>
+	   <button type="reset" id="host_reset">Reset</button>
+   </form>
+   </div>
+   
+   
+   <!-- Make the tab feature can work and hide which part is not chosen -->
+   <script>
+   document.getElementsByClassName("tablink")[0].click();
+   function openRegis(evt, regName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+       tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+       tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }  
+    document.getElementById(regName).style.display = "block";
+    evt.currentTarget.className += " active";
+   }
+   </script>
+
+  </body>
+</html>

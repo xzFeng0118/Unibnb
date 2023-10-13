@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style/style.css">
+    <title>Host Dashboard</title>
+  </head>
+  <body>
+  <div class="top">
+    <!-- Same nav bar with other pages, but users need to login to see this page,
+       So there is no login button here	-->
+    <div class="jumbotron text-center" style="margin-bottom:0;"> <!--  background-image: url('img/background.jfif');-->
+	  <h1>UniBNB</h1>
+	  <p><i>Make your life easier and comfortable</i></p>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="homepage.html">UniBnB</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="host_dashboard.html">Host</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="manager_dashboard.html">Manager</a>
+          </li>
+		  <li class="nav-item">
+			<!-- No account right now, so the log out link just go to home page -->
+            <a class="nav-link" href="homepage.html">Log out</a>
+          </li>
+        </ul>
+		
+       </div>  
+    </nav>
+   </div>
+   
+    <h1>Welcome to UniBnb host page</h1>
+	
+	<!-- Tab to show two different pages, one is the accommodation
+      page, hosts can add, edit, delete the accommodation data in their account,
+       another one is the review page, host can see reviews from client about their accommodation -->
+	<div class="w3-bar w3-border-bottom">
+	  <button class="tablink w3-bar-item w3-button" onclick="openFeature(event, 'Accommodation')">Accommodation</button>
+	  <button class="tablink w3-bar-item w3-button" onclick="openFeature(event, 'Review')">Review</button>
+	</div>
+  <div id="Accommodation", class="w3-container feature">
+	
+	<h2>Accommodation Management</h2>
+    <div class="w3-container">
+	  <!-- There is a button can add data into table by inputing in the modal-->
+	  <button onclick="document.getElementById('add').style.display='block'" class="w3-button w3-green" id="add_new">Add Accommodation</button> <br />
+	  
+	  <!-- this table contains the accommodation this host has-->
+	  <table id="accommodation_table" border="1" class="table table-hover">
+	    <thead>
+	      <tr>
+		    <th>ID</th>
+		    <th>Location</th>
+		    <th>Rooms</th>
+		    <th>Bathrooms</th>
+		    <th>Price</th>
+		    <th>Somking</th>
+		    <th>Garage</th>
+		    <th>Internet</th>
+		    <th>Pet</th>
+		    <th>Address</th>
+		    <th>Edit</th>
+		    <th>Delete</th>
+		  </tr>
+	    </thead>
+	    <tbody>
+	      <tr id="data1">
+		    <td id="ac_id">1</td>
+		    <td id="ac_loc">Tasmania</td>
+		    <td id="ac_room">4</td>
+		    <td id="ac_bath">2</td>
+		    <td id="ac_price">$400</td>
+		    <td id="ac_smoke">No</td>
+		    <td id="ac_gar">Yes</td>
+		    <td id="ac_int">Yes</td>
+		    <td id="ac_pet">No</td>
+		    <td id="ac_add">18 Abcd Road</td>
+		    <td><button onclick="document.getElementById('edit').style.display='block'" class="w3-button w3-blue">Edit</button></td>
+		    <td><button class="w3-button w3-red" id="del_btn1">Delete</button></td>
+		  </tr>
+		  <tr id="data2">
+		    <td id="ac_id2"></td>
+		    <td id="ac_loc2"></td>
+		    <td id="ac_room2"></td>
+		    <td id="ac_bath2"></td>
+		    <td id="ac_price2"></td>
+		    <td id="ac_smoke2"></td>
+		    <td id="ac_gar2"></td>
+		    <td id="ac_int2"></td>
+		    <td id="ac_pet2"></td>
+		    <td id="ac_add2"></td>
+		  </tr>
+	    </tbody>
+	  </tr>
+	  </table>
+	
+	<!-- the modal part link with the add button -->
+	<div id ="add" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('add').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Add Accommodation</h2>
+		</header>
+		<div class="w3-content">
+		  ID<input type="number" id="add_id" /> <br />
+	      Location<input type="text" id="add_loc" /> <br />
+		  Rooms<input type="number" id="add_room" /> <br />
+		  Bathrooms<input type="number" id="add_bath" /> <br />
+		  Price<input type="number" id="add_price" /> <br />
+		  Somking<input type="text" id="add_smoke" /> <br />
+		  Garage<input type="text" id="add_garage" /> <br />
+		  Internet<input type="text" id="add_int" /> <br />
+		  Pet<input type="text" id="add_pet" /> <br />
+		  Address<input type="text" id="add_add" /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('add').style.display='none'" id="add_aoc">Add Accommodation</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('add').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+	
+	<!-- the modal part link with the edit button in the table-->
+	<div id ="edit" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('edit').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Edit Accommodation</h2>
+		</header>
+		<div class="w3-content">
+		  ID<input type="number" id="edi_id" required /> <br />
+	      Location<input type="text" id="edi_loc" required /> <br />
+		  Rooms<input type="number" id="edi_room" required /> <br />
+		  Bathrooms<input type="number" id="edi_bath" required /> <br />
+		  Price<input type="number" id="edi_price" required /> <br />
+		  Somking<input type="text" id="edi_smoke" required /> <br />
+		  Garage<input type="text" id="edi_garage" required /> <br />
+		  Internet<input type="text" id="edi_int" required /> <br />
+		  Pet<input type="text" id="edi_pet" required /> <br />
+		  Address<input type="text" id="edi_add" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('edit').style.display='none'" id="edi_btn1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('edit').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+  </div>
+ </div>
+	
+	<!-- Reviews information-->
+  <div id="Review", class="w3-container feature">
+	<h2>Review Rates</h2>
+	<table id="rate_table" border="1" class="table table-hover">
+	  <thead>
+	    <tr>
+		  <th>Client</th>
+		  <th>Rate</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+		  <td>1</td>
+		  <td class="rate" id="rate1">5</td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td class="rate" id="rate2">4</td>
+		</tr>
+		<tr>
+		  <td>3</td>
+		  <td class="rate" id="rate3">3</td>
+		</tr>
+		<tr>
+		  <td>4</td>
+		  <td class="rate" id="rate4">2</td>
+		</tr>
+		<tr>
+		  <td>5</td>
+		  <td class="rate" id="rate5">4</td>
+		</tr>
+	  </tbody>
+	</tr>
+	</table>
+	
+	
+	<!-- Area to show the average rate -->
+	<p>Your rate is: <strong id="ave_rate">  </strong></p>
+	
+  </div>
+  
+  
+  <!-- Make the tab feature can work and hide which part is not chosen -->
+  <script>
+    document.getElementsByClassName("tablink")[0].click();
+	function openFeature(evt, feaName) {
+	  var i, x, tablinks;
+	  x = document.getElementsByClassName("feature");
+	  for (i = 0; i < x.length; i++) {
+	    x[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablink");
+	  for (i = 0; i < x.length; i++) {
+	    tablinks[i].classList.remove("w3-light-grey");
+	  }
+	  document.getElementById(feaName).style.display = "block";
+	  evt.currentTarget.classList.add("w3-light-grey");
+	}
+	</script>
+	
+	
+	
+	<script src="host_dashboard.js"></script>
+  </body>
+</html>

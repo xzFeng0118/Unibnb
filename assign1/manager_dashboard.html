@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="style/style.css">
+    <title>System Manager Dashboard</title>
+  </head>
+  <body>
+   <div class="top">
+   <!-- Same nav bar with other pages, but users need to login to see this page,
+       So there is no login button here	-->
+    <div class="jumbotron text-center" style="margin-bottom:0">
+	  <h1>UniBNB</h1>
+	  <p><i>Make your life easier and comfortable</i></p>
+	</div>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="homepage.html">UniBnB</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="homepage.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="host_dashboard.html">Host</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="manager_dashboard.html">Manager</a>
+          </li>
+          <li class="nav-item">
+			<!-- No account right now, so the log out link just go to home page -->
+            <a class="nav-link" href="homepage.html">Log out</a>
+          </li>		  
+        </ul>
+       </div>  
+    </nav>
+   </div>
+  
+  
+    <h1>Management System</h1>
+	<!-- Tap to show four different pages, one is the accommodation
+      page, manager can edit, delete the accommodation data in the table,
+      one is to manage the clients, can add, edit or delete clients' details
+	  one is to manage the hosts, can add, edit or delete hosts' details -->
+	<div class="w3-bar w3-border-bottom">
+	  <button class="tablink w3-bar-item w3-button" onclick="openManage(event, 'Accommodation')">Accommodations</button>
+	  <button class="tablink w3-bar-item w3-button" onclick="openManage(event, 'Host')">Hosts</button>
+	  <button class="tablink w3-bar-item w3-button" onclick="openManage(event, 'Client')">Clients</button>
+	  <button class="tablink w3-bar-item w3-button" onclick="openManage(event, 'Reviews')">Reviews</button>
+	</div>
+	<!-- Accommodation management tab-->
+  <div id="Accommodation", class="w3-container manage">
+	<!-- this table contains the accommodation information-->
+	<h2>Accommodation Management</h2>
+    <div class="w3-container">
+	
+	  <table id="accommodation_table" border="1" class="table table-hover">
+	  <thead>
+	    <tr>
+		  <th>ID</th>
+		  <th>Location</th>
+		  <th>Rooms</th>
+		  <th>Bathrooms</th>
+		  <th>Price</th>
+		  <th>Somking</th>
+		  <th>Garage</th>
+		  <th>Internet</th>
+		  <th>Pet</th>
+		  <th>Address</th>
+		  <th>Rate of House</th>
+		  <th>Edit</th>
+		  <th>Delete</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    <tr id="data1">
+		  <td id="ac_id">1</td>
+		  <td id="ac_loc">Tasmania</td>
+		  <td id="ac_room">4</td>
+		  <td id="ac_bath">2</td>
+		  <td id="ac_price">$400</td>
+		  <td id="ac_smoke">No</td>
+		  <td id="ac_gar">Yes</td>
+		  <td id="ac_int">Yes</td>
+		  <td id="ac_pet">No</td>
+		  <td id="ac_add">18 Abcd Road</td>
+		  <td id="ac_rate">4.5</td>
+		  <td><button onclick="document.getElementById('edit').style.display='block'" class="w3-button w3-blue">Edit</button></td>
+		  <td><button class="w3-button w3-red" id="del_btn1">Delete</button></td>
+		</tr>
+		
+	  </tbody>
+	</tr>
+	</table>
+	
+	<!-- Modal part link with the edit button in the table -->
+	<div id ="edit" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('edit').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Edit Accommodation</h2>
+		</header>
+		<div class="w3-content">
+		  ID<input type="number" id="edi_id0" required /> <br />
+		  Location<input type="text" id="edi_loc" required /> <br />
+		  Rooms<input type="number" id="edi_room" required /> <br />
+		  Bathrooms<input type="number" id="edi_bath" required /> <br />
+		  Price<input type="number" id="edi_price" required /> <br />
+		  Somking<input type="text" id="edi_smoke" required /> <br />
+		  Garage<input type="text" id="edi_garage" required /> <br />
+		  Internet<input type="text" id="edi_int" required /> <br />
+		  Pet<input type="text" id="edi_pet" required /> <br />
+		  Address<input type="text" id="edi_add" required /> <br />
+		  Rate<input type="float" id="edi_rate" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('edit').style.display='none'" id="edi_btn1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('edit').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+  </div>
+ </div>
+ 
+ 
+  <!-- Client management tab -->
+  <div id="Client", class="w3-container manage">
+	<h2>Client management</h2>
+	<!-- Button to add the data with modal appears -->
+	<button onclick="document.getElementById('add_cli').style.display='block'" class="w3-button w3-green">Add Client</button> <br />
+	
+	<!-- Data table of clients' information -->
+   <div class="w3-container">
+	<table id="client_table" border="1" class="table table-hover">
+	  <thead>
+	    <tr>
+		  <th>ID</th>
+		  <th>Name</th>
+		  <th>Email</th>
+		  <th>Phone Number</th>
+		  <th>address</th>
+		  <th>Edit</th>
+		  <th>Delete</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    <tr id="cli_data1">
+		  <td id="cli_id1">1</td>
+		  <td id="cli_name1">Xuanzhe Feng</td>
+		  <td id="cli_email1">1234567@gmail.com</td>
+		  <td id="cli_ph1">123456789</td>
+		  <td id="cli_ad1">14 Qwer Road</td>
+		  <td><button onclick="document.getElementById('edi_cli').style.display='block'" class="w3-button w3-blue">Edit</button></td>
+		  <td><button class="w3-button w3-red" id="del_cli1">Delete</button></td>
+		</tr>
+		<tr id="cli_data2">
+		  <td id="cli_id2"></td>
+		  <td id="cli_name2"></td>
+		  <td id="cli_email2"></td>
+		  <td id="cli_ph2"></td>
+		  <td id="cli_ad2"></td>
+		</tr>
+	  </tbody>
+	</tr>
+	</table>
+	
+	<!-- Modal links with the add button to add client details -->
+	<div id ="add_cli" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('add_cli').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Add Client</h2>
+		</header>
+		<div class="w3-content">
+		  ID<input type="number" id="add_cli_id" required /> <br />
+		  Name<input type="text" id="add_cli_name" required /> <br />
+		  Email<input type="text" id="add_cli_email" required /> <br />
+		  Phone Number<input type="number" id="add_cli_phno" required /> <br />
+		  Address<input type="text" id="add_cli_address" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('add_cli').style.display='none'" id="add_cli1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('add_cli').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+	
+	<!-- Modal links with the edit button in the table to edit client details -->
+	<div id ="edi_cli" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('edi_cli').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Add Client</h2>
+		</header>
+		<div class="w3-content"> 
+		  ID<input type="number" id="edi_cli_id" required /> <br />
+		  Name<input type="text" id="edi_cli_name" required /> <br />
+		  Email<input type="text" id="edi_cli_email" required /> <br />
+		  Phone Number<input type="number" id="edi_cli_phno" required /> <br />
+		  Address<input type="text" id="edi_cli_address" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('edi_cli').style.display='none'" id="edi_cli1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('edi_cli').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+  </div>
+ </div>
+
+	<!-- Host management part -->
+  <div id="Host", class="w3-container manage">
+	<h2>Host management</h2>
+	<!-- Add host button, click to show the modal and the input will store to the table. -->
+	<button onclick="document.getElementById('add_host').style.display='block'" class="w3-button w3-green">Add Host</button> <br />
+	
+	<!-- Table contains hosts' data -->
+   <div class="w3-container">
+	<table id="host_table" border="1" class="table table-hover">
+	  <thead>
+	    <tr>
+		  <th>ID</th>
+		  <th>Name</th>
+		  <th>Email</th>
+		  <th>Phone Number</th>
+		  <th>address</th>
+		  <th>ABN Number</th>
+		  <th>Edit</th>
+		  <th>Delete</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    <tr id="host_data1">
+		  <td id="host_id1">1</td>
+		  <td id="host_name1">Yiming Xu</td>
+		  <td id="host_email1">11332244@gmail.com</td>
+		  <td id="host_ph1">123456789</td>
+		  <td id="host_add1">15 Qwer Road</td>
+		  <td id="host_abn">AB1234</td>
+		  <td><button onclick="document.getElementById('edi_host').style.display='block'" class="w3-button w3-blue">Edit</button></td>
+		  <td><button class="w3-button w3-red" id="del_host1">Delete</button></td>
+		</tr>
+		<tr id="host_data2">
+		  <td id="host_id2"></td>
+		  <td id="host_name2"></td>
+		  <td id="host_email2"></td>
+		  <td id="host_ph2"></td>
+		  <td id="host_ad2"></td>
+		  <td id="host_abn2"></td>
+		</tr>
+	  </tbody>
+	</tr>
+	</table>
+	<!-- Modal links with add button to add data into table -->
+	<div id ="add_host" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('add_host').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Add Client</h2>
+		</header>
+		<div class="w3-content">
+		  ID<input type="number" id="add_host_id" required /> <br />
+		  Name<input type="text" id="add_host_name" required /> <br />
+		  Email<input type="text" id="add_host_email" required /> <br />
+		  Phone Number<input type="number" id="add_host_phno" required /> <br />
+		  Address<input type="text" id="add_host_address" required /> <br />
+		  ABN Number<input type="text" id="add_abn" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('add_host').style.display='none'" id="add_host1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('add_host').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+	
+	<!-- Modal links to edit buttton in the table to edit data in the table -->
+	<div id ="edi_host" class="w3-modal w3-animate-opacity">
+	  <div class = "w3-modal-content w3-card-4">
+	    <header class="w3-container w3-teal">
+		  <span onclick="document.getElementById('edi_host').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+		  <h2>Add Client</h2>
+		</header>
+		<div class="w3-content"> 
+		  ID<input type="number" id="edi_host_id" required /> <br />
+		  Name<input type="text" id="edi_host_name" required /> <br />
+		  Email<input type="text" id="edi_host_email" required /> <br />
+		  Phone Number<input type="number" id="edi_host_phno" required /> <br />
+		  Address<input type="text" id="edi_host_address" required /> <br />
+		  ABN Number<input type="text" id="edit_abn" required /> <br />
+		</div>
+		<footer class="w3-container w3-teal">
+		  <button class="w3-button w3-left w3-green w3-border" onclick="document.getElementById('edi_host').style.display='none'" id="edi_host1">Confirm</button>
+		  <button class="w3-button w3-right w3-red w3-border" onclick="document.getElementById('edi_host').style.display='none'">Cancel</button>
+		</footer>
+	  </div>
+	</div>
+	
+  </div>
+  </div>
+	
+	<!-- Reviews management part -->
+  <div id="Reviews", class="w3-container manage">
+	<h2>Clients' reviews</h2>
+	<!-- Review data table -->
+	<table id="review_table" border="1" class="table table-hover">
+	  <thead>
+	    <tr>
+		  <th>Review.No.</th>
+		  <th>Name</th>
+		  <th>Rate</th>
+		  <th>Accommodation ID</th>
+		  <th>Comments</th>
+		  <th>Delete</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	    <tr id="review_data1">
+		  <td>1</td>
+		  <td>Wenyi Xiong</td>
+		  <td>4.8</td>
+		  <td>1</td>
+		  <td>My best experience!</td>
+		  <td><button class="w3-button w3-red" id="del_re1">Delete</button></td>
+		</tr>
+	  </tbody>
+	</tr>
+	</table>
+  </div>
+  
+  <!-- Make the tab feature can work and hide which part is not chosen -->
+  <script>
+    document.getElementsByClassName("tablink")[0].click();
+	function openManage(evt, feaName) {
+	  var i, x, tablinks;
+	  x = document.getElementsByClassName("manage");
+	  for (i = 0; i < x.length; i++) {
+	    x[i].style.display = "none";
+	  }
+	  tablinks = document.getElementsByClassName("tablink");
+	  for (i = 0; i < x.length; i++) {
+	    tablinks[i].classList.remove("w3-light-grey");
+	  }
+	  document.getElementById(feaName).style.display = "block";
+	  evt.currentTarget.classList.add("w3-light-grey");
+	}
+	</script>
+	
+	<script src="management.js"></script>
+  </body>
+</html>

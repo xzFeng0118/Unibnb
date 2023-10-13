@@ -1,0 +1,20 @@
+/*Make the login page elements in the center of the page*/
+#login{
+	text-align:center;
+}
+
+/*make the form(class is regiForm) in the center of the page*/
+.regiForm{
+	text-align:center;
+}
+
+/*make the image(id is avatar)in the center of the page, width and
+height are both 100px*/
+#avatar{
+	text-align:center;
+	width:100px;
+	height:100px;
+}
+
+
+

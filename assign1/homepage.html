@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	  <link rel="stylesheet" href="style/style.css" />
+	  <script src="homepage.js"></script>
+	  <title>HomePage</title> 
+    </head>
+    <body>
+      <div class="top">
+	    <!-- There is the navigation part, include link to each page. 
+		And also has a top-background with company name and slogan -->
+        <div class="jumbotron text-center" style="margin-bottom:0;"> <!--  background-image: url('img/background.jfif');-->
+	      <h1>UniBNB</h1>
+	      <p><i>Make your life easier and comfortable</i></p>
+	    </div>
+	    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+          <a class="navbar-brand" href="homepage.html">UniBnB</a>
+		  <!-- The company name in nav bar link to the home page of our website -->
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+           <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+           <ul class="navbar-nav">
+            <li class="nav-item">
+			  <!-- There's also a link to home page -->
+              <a class="nav-link" href="homepage.html">Home</a>
+            </li>
+            <li class="nav-item">
+			  <!-- There's a link to host dashboard page -->
+              <a class="nav-link" href="host_dashboard.html">Host</a>
+            </li>
+            <li class="nav-item">
+			  <!-- There's a link to manager dashboard page -->
+              <a class="nav-link" href="manager_dashboard.html">Manager</a>
+            </li>
+			<li class="nav-item">
+			  <!-- There's a link to the registration page -->
+              <a class="nav-link" href="registration.html">Sign Up</a>
+            </li>
+			<li class="nav-item">
+			  <!-- No account right now, so the log out link just go to home page -->
+              <a class="nav-link" href="homepage.html">Log out</a>
+            </li>
+           </ul>
+		   <!-- The button in nav bar to let the modal appear for users to login their account -->
+		   <button onclick="document.getElementById('login').style.display='block'" style="background-color:black; color:grey; font-weight:bold; float:right;">Sign In</button>
+          </div>  
+        </nav>
+      </div>
+	  <!-- The login modal -->
+	  <div id="login" class="modal">
+	   <span onclick="document.getElementById('login').style.display='none'" class="close" title="Close Modal">&times;</span>
+	   <form class="modal-content animate" id="log_page" action="homepage.html">
+        <div class="imgcontainer">
+          <img src="img/avatar.jpg" id="avatar" alt="Avatar" class="avatar">
+        </div>
+
+        <div class="container">
+		 <p>
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+		 </p>
+		 
+		 <p>
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+		 </p>
+		 
+		 <p>
+          <button type="submit">Login</button>
+		 </p>
+          
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('login').style.display='none'" class="cancelbtn">Cancel</button><br />
+          <a href="#">Forgot password?</a></span>
+		  <!-- And also a link to the registration page for users who doesn't have account -->
+		  Or   <a href="registration.html" style="text-align:center;">Don't have an account?</a>
+        </div>
+       </form>
+	   
+      </div>
+	  
+	  <!-- The search feature area, here to input the search key words -->
+	  <div class="search">
+	    
+	  <form class="searForm" name="search" id="search" onsubmit="return searchAc()" action="#">
+        <span id = "msg"></span>
+	    <p>
+	      <label for="location">City: </label>
+	      <input type="text" id="location" name="location">
+	    </p>
+	    <p>
+	      <label for="check_in">Check in date: </label>
+	      <input type="text" id="check_in" name="check_in">
+	    </p>
+	    <p>
+	       <label for="check_out">Check out date: </label>
+	       <input type="text" id="check_out" name="check_out">
+	    </p>
+	    <p>
+	      <label for="no_guest">Number of guest(s): </label>
+	      <input type="text" id="no_guest" name="no_guest">
+	    </p>
+	    
+		<p><i>Tips:We only have several data at this moment,try 'Hobart', '21/03', '22/30', '4'. to get search result.(Or check the code in homepage.html to see those data)</i></p>
+		<p><i>And also the first time search result will disappear in one second(because of the auto refresh),input again then the result will show correctlly</i></p>
+	    <button type="submit" id="submit">Search</button>
+	    <button type="reset" id="reset">Reset</button>
+   </form>
+   
+   <!-- Show the search result to users, 
+   and I store datas here because there is no database now,
+   when user open the home page those data would not appear
+   but when they input things matches the data, the mathing data will appear
+   more details in homepage.js-->
+   <h2>Search Result:</h2>
+   <p id="search_result"> </p>
+   <div class="data" id="data1" style="display:none;">
+    <p>
+	  <label for="loca1"><strong>Location: </strong></label>
+	  <p class="location" id="data1_loc">Hobart</p>
+    </p>
+    <p>
+	  <label for="check_in1"><strong>Avaliable From: </strong></label>
+	  <p class="check_indate" id="data1_in">21/03</p>
+    </p>
+    <p>
+	  <label for="check_out1"><strong>To:  </strong></label>
+	  <p class="check_outdate" id="data1_out">22/03</p>
+    </p>
+    <p>
+	  <label for="no_guest1"><strong>Recommand number of guest: </strong></label>
+	  <p class="no_guest" id="data1_nu">4</p>
+    </p>
+    <p>
+	  <label for="detail1"><strong>Other details: </strong></label>
+	  <p class="other_details1">Price:$400<br />5 Rooms<br /> 2 Bathrooms<br /> No smoking<br /> 1 Garage<br />Have Internet<br /> Pet friendly<br /> Address is 18 Abd Road<br /> Rate of house:4.8<br />Rate of host:4.7</p>
+    </p>
+	</div>
+	
+	<div class="data" id="data2" style="display:none;">
+    <p>
+	  <label for="loca2"><strong>Location: </strong></label>
+	  <p class="location" id="data2_loc">Sydney</p>
+    </p>
+    <p>
+	  <label for="check_in2"><strong>Avaliable From: </strong></label>
+	  <p class="check_indate" id="data2_in">22/03</p>
+    </p>
+    <p>
+	  <label for="check_out2"><strong>To:  </strong></label>
+	  <p class="check_outdate" id="data2_out">23/03</p>
+    </p>
+    <p>
+	  <label for="no_guest2"><strong>Recommand number of guest: </strong></label>
+	  <p class="no_guest" id="data2_nu">3</p>
+    </p>
+    <p>
+	  <label for="detail2"><strong>Other details: </strong></label>
+	  <p class="other_details1">Price:$350<br />3 Rooms<br /> 2 Bathrooms<br /> No smoking<br /> No Garage<br />Have Internet<br /> No pet<br /> Address is 18 Aaa Road<br /> Rate of house:4.5<br />Rate of host:4.3</p>
+    </p>
+	</div>
+	
+	<div class="data" id="data3" style="display:none;">
+    <p>
+	  <label for="loca3"><strong>Location: </strong></label>
+	  <p class="location" id="data3_loc">Melbourne</p>
+    </p>
+    <p>
+	  <label for="check_in3"><strong>Avaliable From: </strong></label>
+	  <p class="check_indate" id="data3_in">24/03</p>
+    </p>
+    <p>
+	  <label for="check_out3"><strong>To:  </strong></label>
+	  <p class="check_outdate" id="data3_out">25/03</p>
+    </p>
+    <p>
+	  <label for="no_guest3"><strong>Recommand number of guest: </strong></label>
+	  <p class="no_guest" id="data3_nu">4</p>
+    </p>
+    <p>
+	  <label for="detail3"><strong>Other details: </strong></label>
+	  <p class="other_details1">Price:$400<br />4 Rooms<br /> 2 Bathrooms<br /> No smoking<br /> 1 Garage<br />Have Internet<br /> Pet friendly<br /> Address is 18 Cad Road<br /> Rate of house:4.9<br />Rate of host:4.8</p>
+    </p>
+	</div>
+   
+    
+    </body>
+</html>
+
+
+
+
+
